@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace TasksLibrary
 {
@@ -38,14 +40,49 @@ namespace TasksLibrary
                 var condition = array[centerIndex].CompareTo(valueToFind);
 
                 if (condition > 0)
-                    rightIndex = centerIndex-1;
+                    rightIndex = centerIndex - 1;
                 else if (condition < 0)
-                    leftIndex = centerIndex+1;
+                    leftIndex = centerIndex + 1;
                 else
                     return centerIndex;
             } while (leftIndex <= rightIndex);
 
             return -1;
+        }
+
+        public Dictionary<string, int> GetWordsFrequencyInFile(string path)
+        {
+            var text = "";
+
+            using (var fs = new FileStream(path, FileMode.Open))
+            {
+                using (var sr = new StreamReader(fs, Encoding.GetEncoding(1251)))
+                {
+                    text = sr.ReadToEnd();
+                }
+            }
+
+            var clearText = Regex.Replace(text, "[^A-Za-zА-Яа-я _]", "");
+            var words = clearText.Split(' ', '\t', '\n');
+
+            var dict = new Dictionary<string, int>();
+
+            foreach (var word in words)
+            {
+                if (string.IsNullOrWhiteSpace(word))
+                    continue;
+
+                if (!dict.ContainsKey(word))
+                {
+                    dict.Add(word, 1);
+                }
+                else
+                {
+                    dict[word]++;
+                }
+            }
+
+            return dict;
         }
     }
 }
