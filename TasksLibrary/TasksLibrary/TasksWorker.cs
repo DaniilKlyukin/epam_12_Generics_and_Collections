@@ -32,18 +32,18 @@ namespace TasksLibrary
             var leftIndex = 0;
             var rightIndex = array.Length - 1;
 
-            while (leftIndex != rightIndex)
+            do
             {
                 var centerIndex = (leftIndex + rightIndex) / 2;
                 var condition = array[centerIndex].CompareTo(valueToFind);
 
-                if (condition == 1)
-                    rightIndex = centerIndex;
-                else if (condition == -1)
-                    leftIndex = centerIndex;
+                if (condition > 0)
+                    rightIndex = centerIndex-1;
+                else if (condition < 0)
+                    leftIndex = centerIndex+1;
                 else
                     return centerIndex;
-            }
+            } while (leftIndex <= rightIndex);
 
             return -1;
         }
