@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TasksLibrary;
 using MSTest = Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,6 +39,34 @@ namespace Tests
             GenericBinarySearchingTest(new double[] { 0 }, 0, 0);
             GenericBinarySearchingTest(new char[] { 'a', 'b', 'c', 'd' }, 'd', 3);
             GenericBinarySearchingTest(new char[] { 'a', 'b', 'c', 'd' }, 'C', -1);
+        }
+
+        [MSTest.TestMethod]
+        public void WordsFrequencyInFileTest()
+        {
+            var debugDir = Directory.GetCurrentDirectory();
+            var folders = debugDir.Split('\\');
+            var filesDir = string.Join("\\", folders.Take(folders.Length - 2));
+
+            var actual = tw.GetWordsFrequencyInFile($"{filesDir}\\text1.txt");
+
+            var expected = new Dictionary<string, int>()
+            {
+                {"Это",1},
+                {"тестовый",1},
+                {"файл",2},
+                {"Далее",2},
+                {"символы",1},
+                {"больше",1},
+                {"символов",1},
+                {"нет",1},
+                {"цифры",1},
+                {"Один",1},
+                {"два",1},
+                {"Конец",1},
+            };
+
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
