@@ -26,5 +26,26 @@ namespace TasksLibrary
                 current = newNumber;
             }
         }
+
+        public int BinarySearch<T>(T[] array, T valueToFind) where T : IComparable
+        {
+            var leftIndex = 0;
+            var rightIndex = array.Length - 1;
+
+            while (leftIndex != rightIndex)
+            {
+                var centerIndex = (leftIndex + rightIndex) / 2;
+                var condition = array[centerIndex].CompareTo(valueToFind);
+
+                if (condition == 1)
+                    rightIndex = centerIndex;
+                else if (condition == -1)
+                    leftIndex = centerIndex;
+                else
+                    return centerIndex;
+            }
+
+            return -1;
+        }
     }
 }
