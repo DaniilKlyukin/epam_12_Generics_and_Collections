@@ -68,5 +68,31 @@ namespace Tests
 
             CollectionAssert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void QueueTest()
+        {
+            var q = new MyQueue<int>(1, 3, 5);
+            CollectionAssert.AreEqual(new int[] { 1, 3, 5 }, q);
+
+            q.Enqueue(7);
+            CollectionAssert.AreEqual(new int[] { 1, 3, 5, 7 }, q);
+
+            q.Dequeue();
+            CollectionAssert.AreEqual(new int[] { 3, 5, 7 }, q);
+
+            Assert.AreEqual(3, q.Count);
+
+            q.Clear();
+            Assert.AreEqual(0, q.Count);
+            CollectionAssert.AreEqual(new int[] { }, q);
+
+            for (int i = 0; i < 10; i++)
+            {
+                q.Enqueue(1);
+            }
+
+            CollectionAssert.AreEqual(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, q);
+        }
     }
 }
