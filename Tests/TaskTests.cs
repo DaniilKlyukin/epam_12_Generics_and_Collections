@@ -94,5 +94,31 @@ namespace Tests
 
             CollectionAssert.AreEqual(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, q);
         }
+
+        [Test]
+        public void StackTest()
+        {
+            var stack = new MyStack<int>(1, 3, 5);
+            CollectionAssert.AreEqual(new int[] { 5, 3, 1 }, stack);
+
+            stack.Push(7);
+            CollectionAssert.AreEqual(new int[] { 7, 5, 3, 1 }, stack);
+
+            stack.Pop();
+            CollectionAssert.AreEqual(new int[] { 5, 3, 1 }, stack);
+
+            Assert.AreEqual(3, stack.Count);
+
+            stack.Clear();
+            Assert.AreEqual(0, stack.Count);
+            CollectionAssert.AreEqual(new int[] { }, stack);
+
+            for (int i = 0; i < 10; i++)
+            {
+                stack.Push(1);
+            }
+
+            CollectionAssert.AreEqual(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, stack);
+        }
     }
 }
