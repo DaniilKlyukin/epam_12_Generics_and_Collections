@@ -39,7 +39,7 @@ namespace TasksLibrary
         {
             var power = (int)Math.Log(values.Length, 2) + 1;
 
-            capacity = (int)Math.Pow(2, power);
+            capacity = Math.Max(BaseCapacity,(int)Math.Pow(2, power));
             count = values.Length;
             data = new T[capacity];
 
