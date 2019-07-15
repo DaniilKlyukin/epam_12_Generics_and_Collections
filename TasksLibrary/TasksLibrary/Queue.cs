@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace TasksLibrary
 {
-    public class MyQueue<T> : IEnumerable<T>
+    public class MyQueue<T> : IteratorAggregate
     {
         const int BaseCapacity = 8;
 
@@ -88,6 +87,16 @@ namespace TasksLibrary
             return result;
         }
 
+        public T Peek()
+        {
+            if (count == 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return data[0];
+        }
+
         public void Clear()
         {
             count = 0;
@@ -107,21 +116,17 @@ namespace TasksLibrary
             return false;
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public override IEnumerator GetEnumerator()
         {
-            var enumerator = data.GetEnumerator();
-
-            var index = 0;
-            while (enumerator.MoveNext() && index < count)
-            {
-                yield return (T)enumerator.Current;
-                index++;
-            }
+            return new QueueIterator<T>(this);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public T this[int index]
         {
-            return this.GetEnumerator();
+            get
+            {
+                return data[index];
+            }
         }
     }
 }

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Iterator\Iterator.cs" />
+    <Compile Include="Iterator\QueueIterator.cs" />
     <Compile Include="Queue.cs" />
     <Compile Include="TasksWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
