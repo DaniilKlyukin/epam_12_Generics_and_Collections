@@ -120,5 +120,31 @@ namespace Tests
 
             CollectionAssert.AreEqual(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, stack);
         }
+
+        [Test]
+        public void BinaryTreeTest()
+        {
+            var t = new BinarySearchDirectTree<int>(25);
+
+            t.Add(50);
+            t.Add(70);
+            t.Add(90);
+            t.Add(66);
+            t.Add(35);
+            t.Add(44);
+            t.Add(31);
+            t.Add(15);
+            t.Add(10);
+            t.Add(4);
+            t.Add(12);
+            t.Add(22);
+            t.Add(18);
+            t.Add(24);
+
+            foreach (var n in t)
+            {
+
+            }
+        }
     }
 }
