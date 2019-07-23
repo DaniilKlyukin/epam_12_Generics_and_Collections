@@ -122,9 +122,9 @@ namespace Tests
         }
 
         [Test]
-        public void BinaryTreeTest()
+        public void BinaryTreeIntTest()
         {
-            var t = new BinarySearchDirectTree<int>(25);
+            var t = new BinarySearchTree<int>(25);
 
             t.Add(50);
             t.Add(70);
@@ -141,10 +141,198 @@ namespace Tests
             t.Add(18);
             t.Add(24);
 
-            foreach (var n in t)
-            {
+            var reverseTree = new int[] { 4, 12, 10, 18, 24, 22, 15, 31, 44, 35, 66, 90, 70, 50, 25 };
+            CollectionAssert.AreEqual(reverseTree, t.Traverse(TraverseType.Reverse).Select(x => x.Value));
 
-            }
+            var directTree = new int[] { 25, 15, 10, 4, 12, 22, 18, 24, 50, 35, 31, 44, 70, 66, 90 };
+            CollectionAssert.AreEqual(directTree, t.Traverse(TraverseType.Direct).Select(x => x.Value));
+
+            var transverseTree = new int[] { 4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90 };
+            CollectionAssert.AreEqual(transverseTree, t.Traverse(TraverseType.Transverse).Select(x => x.Value));
+        }
+
+        [Test]
+        public void BinaryTreeStringTest()
+        {
+            var t = new BinarySearchTree<string>("G");
+
+            t.Add("D");
+            t.Add("A");
+            t.Add("E");
+            t.Add("K");
+            t.Add("J");
+            t.Add("M");
+
+            var reverseTree = new string[] { "A", "E", "D", "J", "M", "K", "G" };
+            CollectionAssert.AreEqual(reverseTree, t.Traverse(TraverseType.Reverse).Select(x => x.Value));
+
+            var directTree = new string[] { "G", "D", "A", "E", "K", "J", "M" };
+            CollectionAssert.AreEqual(directTree, t.Traverse(TraverseType.Direct).Select(x => x.Value));
+
+            var transverseTree = new string[] { "A", "D", "E", "G", "J", "K", "M" };
+            CollectionAssert.AreEqual(transverseTree, t.Traverse(TraverseType.Transverse).Select(x => x.Value));
+        }
+
+        [Test]
+        public void BinaryTreeBookTest()
+        {
+            var t = new BinarySearchTree<Book>(new Book(2, 25, 3000));//0
+
+            t.Add(new Book(2, 26, 3000));//1
+            t.Add(new Book(2, 26, 3150));//2
+            t.Add(new Book(2, 25, 3050));//3
+            t.Add(new Book(1, 15, 2100));//4
+            t.Add(new Book(1, 14, 1900));//5
+            t.Add(new Book(1, 16, 2300));//6
+
+            var reverseTree = new Book[]
+            {
+                new Book(1, 14, 1900),
+                new Book(1, 16, 2300),
+                new Book(1, 15, 2100),
+                new Book(2, 25, 3050),
+                new Book(2, 26, 3150),
+                new Book(2, 26, 3000),
+                new Book(2, 25, 3000)
+            };
+            CollectionAssert.AreEqual(reverseTree, t.Traverse(TraverseType.Reverse).Select(x => x.Value));
+
+            var directTree = new Book[]
+            {
+                new Book(2, 25, 3000),
+                new Book(1, 15, 2100),
+                new Book(1, 14, 1900),
+                new Book(1, 16, 2300),
+                new Book(2, 26, 3000),
+                new Book(2, 25, 3050),
+                new Book(2, 26, 3150)
+            };
+            CollectionAssert.AreEqual(directTree, t.Traverse(TraverseType.Direct).Select(x => x.Value));
+
+            var transverseTree = new Book[]
+            {
+                new Book(1, 14, 1900),
+                new Book(1, 15, 2100),
+                new Book(1, 16, 2300),
+                new Book(2, 25, 3000),
+                new Book(2, 25, 3050),
+                new Book(2, 26, 3000),
+                new Book(2, 26, 3150)
+            };
+            CollectionAssert.AreEqual(transverseTree, t.Traverse(TraverseType.Transverse).Select(x => x.Value));
+        }
+
+        [Test]
+        public void BinaryTreePointTest()
+        {
+            var t = new BinarySearchTree<Point>(new Point(4, 4));//0
+
+            t.Add(new Point(4, 8));//1
+            t.Add(new Point(8, 7));//2
+            t.Add(new Point(5, 4));//3
+            t.Add(new Point(3, 3));//4
+            t.Add(new Point(1, 2));//5
+            t.Add(new Point(3, 4));//6
+
+            var reverseTree = new Point[]
+            {
+                new Point(1, 2),
+                new Point(3, 4),
+                new Point(3, 3),
+                new Point(5, 4),
+                new Point(8, 7),
+                new Point(4, 8),
+                new Point(4, 4)
+            };
+            CollectionAssert.AreEqual(reverseTree, t.Traverse(TraverseType.Reverse).Select(x => x.Value));
+
+            var directTree = new Point[]
+            {
+                new Point(4, 4),
+                new Point(3, 3),
+                new Point(1, 2),
+                new Point(3, 4),
+                new Point(4, 8),
+                new Point(5, 4),
+                new Point(8, 7)
+            };
+            CollectionAssert.AreEqual(directTree, t.Traverse(TraverseType.Direct).Select(x => x.Value));
+
+            var transverseTree = new Point[]
+            {
+                new Point(1, 2),
+                new Point(3, 3),
+                new Point(3, 4),
+                new Point(4, 4),
+                new Point(5, 4),
+                new Point(4, 8),
+                new Point(8, 7)
+            };
+            CollectionAssert.AreEqual(transverseTree, t.Traverse(TraverseType.Transverse).Select(x => x.Value));
+        }
+    }
+
+    class Book : IComparable
+    {
+        public int Titles { get; set; }
+        public int Pages { get; set; }
+        public int Words { get; set; }
+
+        public Book(int titles, int pages, int words)
+        {
+            Titles = titles;
+            Pages = pages;
+            Words = words;
+        }
+
+        public int CompareTo(object obj)
+        {
+            var b = (Book)obj;
+            var conditionTitle = Titles.CompareTo(b.Titles);
+            if (conditionTitle != 0)
+                return conditionTitle;
+
+            var conditionPages = Pages.CompareTo(b.Pages);
+            if (conditionPages != 0)
+                return conditionPages;
+
+            var conditionWords = Words.CompareTo(b.Words);
+            return conditionWords;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var b = (Book)obj;
+            return (b.Titles == Titles && b.Pages == Pages && b.Words == Words);
+        }
+    }
+
+    struct Point : IComparable
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+
+        public Point(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public double Distance()
+        {
+            return Math.Abs(X * X + Y * Y);
+        }
+
+        public int CompareTo(object obj)
+        {
+            var p = (Point)obj;
+            return this.Distance().CompareTo(p.Distance());
+        }
+
+        public override bool Equals(object obj)
+        {
+            var p = (Point)obj;
+            return (p.Distance() == this.Distance());
         }
     }
 }
