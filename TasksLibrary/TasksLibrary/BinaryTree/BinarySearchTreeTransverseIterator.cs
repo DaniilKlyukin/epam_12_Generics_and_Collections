@@ -34,24 +34,17 @@ namespace TasksLibrary
                 return true;
             }
 
+            if (Traverse())
+            {
+                visited.Push(current);
+                return true;
+            }
 
-            if (current.Left != null && !visited.Contains(current.Left))
-            {
-                current = current.Left;
-                visited.Push(current);
-                return true;
-            }
-            if (current.Right != null && !visited.Contains(current.Right))
-            {
-                current = current.Right;
-                visited.Push(current);
-                return true;
-            }
             else if (current.Parent != null)
             {
-                current = current.Parent;
-                if (!visited.Contains(current))
+                if (!visited.Contains(current.Parent))
                 {
+                    current = current.Parent;
                     visited.Push(current);
                     return true;
                 }
@@ -62,6 +55,10 @@ namespace TasksLibrary
                         current = current.Parent;
                         if (!visited.Contains(current))
                             break;
+                        else if (Traverse())
+                        {
+                            break;
+                        }
                     }
                     if (current == null)
                         return false;
@@ -75,6 +72,26 @@ namespace TasksLibrary
             else
             {
                 return false;
+            }
+        }
+
+        private bool Traverse()
+        {
+            var moved = false;
+            while (true)
+            {
+                if (current.Left != null && !visited.Contains(current.Left))
+                {
+                    current = current.Left;
+                    moved = true;
+                }
+                else if (current.Right != null && !visited.Contains(current.Right))
+                {
+                    current = current.Right;
+                    moved = true;
+                }
+                else
+                    return moved;
             }
         }
 
