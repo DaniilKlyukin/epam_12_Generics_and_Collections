@@ -1,11 +1,27 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TasksLibrary
 {
-    public abstract class BinarySearchTree<T> : IteratorAggregate where T : IComparable
+    public enum TraverseType
+    {
+        Direct,
+        Transverse,
+        Reverse
+    }
+
+    public class BinarySearchTree<T> where T : IComparable
     {
         public Node<T> root { get; private set; }
+
+        public object Current
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public BinarySearchTree(T rootValue)
         {
@@ -22,7 +38,7 @@ namespace TasksLibrary
 
                 if (condition > 0)
                 {
-                    if  (current.Left == null)
+                    if (current.Left == null)
                     {
                         current.Left = child;
                         child.Parent = current;
@@ -51,7 +67,26 @@ namespace TasksLibrary
             }
         }
 
-        public abstract override IEnumerator GetEnumerator();
+        private IEnumerator TraverseEnumerator(TraverseType type = TraverseType.Direct)
+        {
+            switch (type)
+            {
+                case TraverseType.Direct: return new BinarySearchTreeDirectIterator<T>(this);
+                case TraverseType.Transverse: return new BinarySearchTreeTransverseIterator<T>(this);
+                case TraverseType.Reverse: return new BinarySearchTreeReverseIterator<T>(this);
+                default: return new BinarySearchTreeDirectIterator<T>(this);
+            }
+        }
+
+        public IEnumerable<Node<T>> Traverse(TraverseType type = TraverseType.Direct)
+        {
+            var enumerator = TraverseEnumerator(type);
+
+            while (enumerator.MoveNext())
+            {
+                yield return (Node<T>)enumerator.Current;
+            }
+        }
     }
 
     public class Node<T>
