@@ -122,6 +122,33 @@ namespace Tests
         }
 
         [Test]
+        public void SetTest()
+        {
+            var set = new Set<int>(1, 3, 5);
+
+            CollectionAssert.AreEqual(new int[] { 1, 3, 5 }, set);
+
+            set.Add(7);
+            CollectionAssert.AreEqual(new int[] { 1, 3, 5, 7 }, set);
+
+            set.Remove(1);
+            CollectionAssert.AreEqual(new int[] { 1, 5, 7 }, set);
+
+            Assert.AreEqual(3, set.Count);
+
+            set.Clear();
+            Assert.AreEqual(0, set.Count);
+            CollectionAssert.AreEqual(new int[] { }, set);
+
+            for (int i = 0; i < 10; i++)
+            {
+                set.Add(1);
+            }
+
+            CollectionAssert.AreEqual(new int[] { 1 }, set);
+        }
+
+        [Test]
         public void BinaryTreeIntTest()
         {
             var t = new BinarySearchTree<int>(25);
