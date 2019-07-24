@@ -45,6 +45,7 @@
     <Compile Include="BinaryTree\BinarySearchTreeDirectIterator.cs" />
     <Compile Include="BinaryTree\BinarySearchTreeTransverseIterator.cs" />
     <Compile Include="BinaryTree\TreeIterator.cs" />
+    <Compile Include="Calculator.cs" />
     <Compile Include="Iterator\Iterator.cs" />
     <Compile Include="Iterator\StackIterator.cs" />
     <Compile Include="Iterator\QueueIterator.cs" />
