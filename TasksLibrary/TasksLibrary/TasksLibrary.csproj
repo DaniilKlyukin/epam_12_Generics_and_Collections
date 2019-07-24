@@ -47,8 +47,10 @@
     <Compile Include="BinaryTree\TreeIterator.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Iterator\Iterator.cs" />
+    <Compile Include="Iterator\SetIterator.cs" />
     <Compile Include="Iterator\StackIterator.cs" />
     <Compile Include="Iterator\QueueIterator.cs" />
+    <Compile Include="Set.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="Queue.cs" />
     <Compile Include="TasksWorker.cs" />
