@@ -26,8 +26,8 @@ Develop a generic class-collection Stack that implements the basic operations fo
 
 </br>**Task 6.**</br>
 Develop a generic class-collection Set that implements the basic operations for working with the stucture data set with the reference types elements. Implement the capability to iterate by collection by block iterator yield. Develop unit-tests.
-[Решение]()
-[Тесты]()
+[Решение](https://github.com/KaBaN4iK357/epam_12_Generics_and_Collections/blob/master/TasksLibrary/TasksLibrary/Set.cs)
+[Тесты](https://github.com/KaBaN4iK357/epam_12_Generics_and_Collections/blob/56f752011946b2c06e15a3415dbb0f662e7ac8aa/Tests/TaskTests.cs#L125)
 
 </br>**Task 7.**</br>
 Develop a generic class-collection BinarySearchTree that implements the basic operations for working with the stucture data binary search tree. Provide an opportunity of using a plug-in interface to implement the order relation. Implement three ways of traversing the tree: direct (preorder), transverse (inorder), reverse (postorder) (use the block iterator yield). Develop unit-tests. Use for the testiong the following types:
