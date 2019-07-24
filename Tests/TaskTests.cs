@@ -270,6 +270,18 @@ namespace Tests
             };
             CollectionAssert.AreEqual(transverseTree, t.Traverse(TraverseType.Transverse).Select(x => x.Value));
         }
+
+        Calculator calc = new Calculator();
+
+        [TestCase("7 2 3 * -", ExpectedResult = 1)]
+        [TestCase("5 1 2 + 4 * + 3 -", ExpectedResult = 14)]
+        [TestCase("1 2 + 4 * 3 +", ExpectedResult = 15)]
+        [TestCase("0 10 - 4 / 1 +", ExpectedResult = -1.5)]
+        [TestCase("0 10 * 0 +", ExpectedResult = 0)]
+        public double CalculatorTest(string input)
+        {
+            return calc.Calculate(input);
+        }
     }
 
     class Book : IComparable
